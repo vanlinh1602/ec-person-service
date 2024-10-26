@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Classroom } from 'src/modules/classroom/database/classroom.entity';
-import { Courses } from 'src/modules/courses/database/courses.entity';
+import { Student } from 'src/modules/students/database/students.entity';
+import { Teacher } from 'src/modules/teachers/database/teacher.entity';
 
 export const databaseProviders = [
   {
@@ -14,7 +14,7 @@ export const databaseProviders = [
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
       });
-      sequelize.addModels([Classroom, Courses]);
+      sequelize.addModels([Student, Teacher]);
       await sequelize.sync();
       return sequelize;
     },
