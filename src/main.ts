@@ -31,7 +31,7 @@ async function bootstrap() {
       origin:
         env === 'development'
           ? [/localhost/, /127.0.0.1/]
-          : [/\.kuma\.id\.vn$/],
+          : [/\.kuma\.id\.vn$/, /\.vercel\.app$/],
       credentials: true,
     }),
   );
