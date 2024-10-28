@@ -28,7 +28,10 @@ async function bootstrap() {
   app.use(helmet());
   app.use(
     cors({
-      origin: env === 'development' ? [/localhost/, /127.0.0.1/] : [],
+      origin:
+        env === 'development'
+          ? [/localhost/, /127.0.0.1/]
+          : [/\.kuma\.id\.vn$/],
       credentials: true,
     }),
   );
