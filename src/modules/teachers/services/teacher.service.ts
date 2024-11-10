@@ -19,11 +19,9 @@ export class TeacherService implements ITeacherService {
     });
   }
 
-  async getTeacher(teacherId: string): Promise<Teacher> {
-    return this.teacherRepository.findOne({
-      where: {
-        id: teacherId,
-      },
+  async getFilterTeacher(filter: Partial<ITeacher>): Promise<Teacher[]> {
+    return this.teacherRepository.findAll({
+      where: filter,
     });
   }
 

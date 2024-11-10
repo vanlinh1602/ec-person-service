@@ -25,6 +25,9 @@ export class Teacher extends Model<ITeacher, ITeacherCreate> {
   phone: string;
 
   @Column
+  avatar: string;
+
+  @Column
   gender: string;
 
   @Column(DataType.DOUBLE)
@@ -32,4 +35,7 @@ export class Teacher extends Model<ITeacher, ITeacherCreate> {
 
   @Column
   address: string;
+
+  @Column(DataType.JSON)
+  qualifications: string[];
 }

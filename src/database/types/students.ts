@@ -4,6 +4,7 @@ export interface IStudent {
   id: string;
   name: string;
   email: string;
+  avatar?: string;
   phone?: string;
   birthdate: number;
   gender: string;

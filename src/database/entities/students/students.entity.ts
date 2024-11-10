@@ -19,6 +19,9 @@ export class Student extends Model<IStudent, IStudentCreate> {
   name: string;
 
   @Column
+  avatar: string;
+
+  @Column
   email: string;
 
   @Column

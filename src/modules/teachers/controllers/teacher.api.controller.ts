@@ -7,16 +7,15 @@ import { TeacherService } from '../services/teacher.service';
 export class TeacherApiController {
   constructor(private readonly teacherServices: TeacherService) {}
 
-  @Get('/get/all')
-  async getAll(): Promise<ITeacher[]> {
-    const teacher = await this.teacherServices.getTeachers();
-    return teacher.map((teacher) => teacher.dataValues);
-  }
-
-  @Get('/get/:id')
-  async getTeacher(@Param('id') id: string): Promise<ITeacher> {
-    const classroom = await this.teacherServices.getTeacher(id);
-    return classroom.dataValues;
+  @Get('/get')
+  async getTeacher(@Param() filter: Partial<ITeacher>): Promise<ITeacher[]> {
+    if (!Object.keys(filter).length) {
+      const teachers = await this.teacherServices.getTeachers();
+      return teachers.map((teacher) => teacher.dataValues);
+    } else {
+      const teachers = await this.teacherServices.getFilterTeacher(filter);
+      return teachers.map((teacher) => teacher.dataValues);
+    }
   }
 
   @Post('/create')
