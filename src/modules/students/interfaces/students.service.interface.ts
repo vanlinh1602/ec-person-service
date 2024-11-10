@@ -1,21 +1,9 @@
-import { Optional } from 'sequelize';
+import { IStudent } from 'src/database/types/students';
 
-import { Student } from '../database/students.entity';
-
-export interface IStudent {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  birthdate: number;
-  gender: string;
-  address: string;
-}
-
-export type IStudentCreate = Optional<IStudent, 'id'>;
+import { Student } from '../../../database/entities/students/students.entity';
 
 export interface IStudentService {
-  getStudent: (filter: Partial<IStudent>) => Promise<Student>;
+  getStudent: (filter: Partial<IStudent>) => Promise<Student[]>;
   getStudents: () => Promise<Student[]>;
   createStudent: (student: Partial<IStudent>) => Promise<Student>;
   updateStudent: (id: string, student: Student) => Promise<boolean>;

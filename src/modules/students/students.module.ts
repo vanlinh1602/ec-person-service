@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { Student } from './database/students.entity';
+import { Student } from '../../database/entities/students/students.entity';
 import { StudentService } from './services/students.service';
 
 @Module({

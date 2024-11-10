@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { generateID } from 'src/common';
+import { IStudent } from 'src/database/types/students';
 
-import { Student } from '../database/students.entity';
-import {
-  IStudent,
-  IStudentService,
-} from '../interfaces/students.service.interface';
+import { Student } from '../../../database/entities/students/students.entity';
+import { IStudentService } from '../interfaces/students.service.interface';
 
 @Injectable()
 export class StudentService implements IStudentService {
@@ -13,8 +12,8 @@ export class StudentService implements IStudentService {
     private studentRepository: typeof Student,
   ) {}
 
-  async getStudent(filter: Partial<IStudent>): Promise<Student> {
-    return this.studentRepository.findOne({
+  async getStudent(filter: Partial<IStudent>): Promise<Student[]> {
+    return this.studentRepository.findAll({
       where: filter,
     });
   }
@@ -24,7 +23,10 @@ export class StudentService implements IStudentService {
   }
 
   async createStudent(student: Partial<IStudent>): Promise<Student> {
-    return this.studentRepository.create(student);
+    return this.studentRepository.create({
+      ...student,
+      id: generateID(),
+    });
   }
 
   async updateStudent(id: string, student: Partial<Student>): Promise<boolean> {

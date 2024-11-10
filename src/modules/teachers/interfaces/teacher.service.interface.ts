@@ -1,18 +1,6 @@
-import { Optional } from 'sequelize';
+import { ITeacher } from 'src/database/types/teachers';
 
-import { Teacher } from '../database/teacher.entity';
-
-export interface ITeacher {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  gender: string;
-  birthdate: number;
-  address: string;
-}
-
-export type ITeacherCreate = Optional<ITeacher, 'id'>;
+import { Teacher } from '../../../database/entities/teachers/teacher.entity';
 
 export interface ITeacherService {
   createTeacher: (teacher: ITeacher) => Promise<Teacher>;

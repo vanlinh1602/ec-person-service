@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { generateID } from 'src/common';
+import { ITeacher } from 'src/database/types/teachers';
 
-import { Teacher } from '../database/teacher.entity';
-import {
-  ITeacher,
-  ITeacherService,
-} from '../interfaces/teacher.service.interface';
+import { Teacher } from '../../../database/entities/teachers/teacher.entity';
+import { ITeacherService } from '../interfaces/teacher.service.interface';
 
 @Injectable()
 export class TeacherService implements ITeacherService {
@@ -14,7 +13,10 @@ export class TeacherService implements ITeacherService {
   ) {}
 
   async createTeacher(teacher: Partial<ITeacher>): Promise<Teacher> {
-    return this.teacherRepository.create(teacher);
+    return this.teacherRepository.create({
+      ...teacher,
+      id: generateID(),
+    });
   }
 
   async getTeacher(teacherId: string): Promise<Teacher> {

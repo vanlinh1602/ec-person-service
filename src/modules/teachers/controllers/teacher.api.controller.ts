@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ITeacher } from 'src/database/types/teachers';
 
-import { ITeacher } from '../interfaces/teacher.service.interface';
 import { TeacherService } from '../services/teacher.service';
 
 @Controller()

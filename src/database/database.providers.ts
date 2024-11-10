@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Student } from 'src/modules/students/database/students.entity';
-import { Teacher } from 'src/modules/teachers/database/teacher.entity';
+import { Student } from 'src/database/entities/students/students.entity';
+import { Teacher } from 'src/database/entities/teachers/teacher.entity';
 
 export const databaseProviders = [
   {

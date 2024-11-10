@@ -1,30 +1,23 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { IStudent } from 'src/database/types/students';
 
-import { IStudent } from '../interfaces/students.service.interface';
 import { StudentService } from '../services/students.service';
 
 @Controller()
 export class StudentApiController {
   constructor(private readonly studentServices: StudentService) {}
 
-  @Get('/get/all')
-  async getStudents(): Promise<IStudent[]> {
-    const students = await this.studentServices.getStudents();
-    return students.map((student) => student.dataValues);
-  }
-
-  @Get('/get/:id')
-  async getStudent(@Param('id') id: string): Promise<IStudent> {
-    const student = await this.studentServices.getStudent({ id });
-    return student.dataValues;
-  }
-
-  @Post('/get')
+  @Get('/get')
   async getStudentByFilter(
-    @Body() filter: Partial<IStudent>,
-  ): Promise<IStudent> {
-    const student = await this.studentServices.getStudent(filter);
-    return student.dataValues;
+    @Param() filter: Partial<IStudent>,
+  ): Promise<IStudent[]> {
+    if (!Object.keys(filter).length) {
+      const students = await this.studentServices.getStudents();
+      return students.map((student) => student.dataValues);
+    } else {
+      const students = await this.studentServices.getStudent(filter);
+      return students.map((student) => student.dataValues);
+    }
   }
 
   @Post('/create')

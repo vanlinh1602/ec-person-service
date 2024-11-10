@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import configs from './configs';
+import { DatabaseModule } from './database/database.module';
 import { RouterModule } from './router/router.module';
-import { DatabaseModule } from './services/database/database.module';
 
 @Module({
   imports: [

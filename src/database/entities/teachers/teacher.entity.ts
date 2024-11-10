@@ -1,14 +1,20 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
-
 import {
-  ITeacher,
-  ITeacherCreate,
-} from '../interfaces/teacher.service.interface';
+  Column,
+  DataType,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
+import { ITeacher, ITeacherCreate } from 'src/database/types/teachers';
 
 @Table({
   tableName: 'teachers',
 })
 export class Teacher extends Model<ITeacher, ITeacherCreate> {
+  @PrimaryKey
+  @Column(DataType.STRING)
+  id: string;
+
   @Column
   name: string;
 
