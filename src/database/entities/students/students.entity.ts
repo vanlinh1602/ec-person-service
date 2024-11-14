@@ -39,6 +39,6 @@ export class Student extends Model<IStudent, IStudentCreate> {
   @Column(DataType.JSON)
   courses: string[];
 
-  @Column(DataType.JSON)
-  classes: string[];
+  // @Column(DataType.JSON)
+  // classes: string[];
 }
