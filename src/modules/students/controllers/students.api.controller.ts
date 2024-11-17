@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { IStudent } from 'src/database/types/students';
 
 import { StudentService } from '../services/students.service';
@@ -9,8 +9,10 @@ export class StudentApiController {
 
   @Get('/get')
   async getStudentByFilter(
-    @Param() filter: Partial<IStudent>,
+    @Param() params: Partial<IStudent>,
+    @Query() query: any,
   ): Promise<IStudent[]> {
+    const filter = { ...params, ...query };
     if (!Object.keys(filter).length) {
       const students = await this.studentServices.getStudents();
       return students.map((student) => student.dataValues);

@@ -51,15 +51,8 @@ async function bootstrap() {
     session({
       name: ProductID,
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: false,
       proxy: true,
-      cookie:
-        process.env.NODE_ENV === 'development'
-          ? { secure: false }
-          : {
-              secure: true,
-              sameSite: 'none',
-            },
       secret: process.env.SESSION_SECRET || 'dev',
       store: sessionStore,
     }),

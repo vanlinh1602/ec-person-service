@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { IStaff } from 'src/database/types/staffs';
 
 import { StaffService } from '../services/staffs.service';
@@ -8,7 +8,13 @@ export class StaffApiController {
   constructor(private readonly teacherServices: StaffService) {}
 
   @Get('/get')
-  async getStaff(@Param() filter: Partial<IStaff>): Promise<IStaff[]> {
+  async getStaff(
+    @Param() params: Partial<IStaff>,
+    @Query() query: any,
+  ): Promise<IStaff[]> {
+    const filter = { ...params, ...query };
+    console.log('filter', filter);
+
     if (!Object.keys(filter).length) {
       const staffs = await this.teacherServices.getStaffs();
       return staffs.map((staff) => staff.dataValues);
