@@ -55,6 +55,9 @@ async function bootstrap() {
       proxy: true,
       secret: process.env.SESSION_SECRET || 'dev',
       store: sessionStore,
+      cookie: {
+        domain: env === 'development' ? 'localhost' : '.kuma.id.vn',
+      },
     }),
   );
 

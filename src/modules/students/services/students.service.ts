@@ -35,6 +35,7 @@ export class StudentService implements IStudentService {
         id,
       },
     });
+
     return updated[0] > 0;
   }
 

@@ -38,6 +38,7 @@ export class StudentApiController {
       data.id,
       data.student,
     );
+
     return { success };
   }
 
