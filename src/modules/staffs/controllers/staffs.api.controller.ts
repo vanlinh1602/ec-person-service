@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { IStaff } from 'src/database/types/staffs';
 
 import { StaffService } from '../services/staffs.service';
@@ -7,7 +16,7 @@ import { StaffService } from '../services/staffs.service';
 export class StaffApiController {
   constructor(private readonly teacherServices: StaffService) {}
 
-  @Get('/get')
+  @Get('/')
   async getStaff(
     @Param() params: Partial<IStaff>,
     @Query() query: any,
@@ -22,13 +31,13 @@ export class StaffApiController {
     }
   }
 
-  @Post('/create')
+  @Post('/')
   async createStaff(@Body() data: { staff: Partial<IStaff> }): Promise<IStaff> {
     const newStaff = await this.teacherServices.createStaff(data.staff);
     return newStaff.dataValues;
   }
 
-  @Post('/update')
+  @Put('/')
   async updateStaff(
     @Body() data: { id: string; staff: Partial<IStaff> },
   ): Promise<{ success: boolean }> {
@@ -36,9 +45,9 @@ export class StaffApiController {
     return { success };
   }
 
-  @Post('/delete')
+  @Delete('/')
   async deleteStaff(
-    @Body() data: { id: string },
+    @Query() data: { id: string },
   ): Promise<{ success: boolean }> {
     const success = await this.teacherServices.deleteStaff(data.id);
     return { success };
