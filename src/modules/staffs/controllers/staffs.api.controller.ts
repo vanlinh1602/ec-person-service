@@ -13,8 +13,6 @@ export class StaffApiController {
     @Query() query: any,
   ): Promise<IStaff[]> {
     const filter = { ...params, ...query };
-    console.log('filter', filter);
-
     if (!Object.keys(filter).length) {
       const staffs = await this.teacherServices.getStaffs();
       return staffs.map((staff) => staff.dataValues);
